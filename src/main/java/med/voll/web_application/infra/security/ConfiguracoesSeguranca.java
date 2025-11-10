@@ -47,7 +47,7 @@ public class ConfiguracoesSeguranca {
                 )
                 .logout(
                         logout ->
-                                logout.logoutSuccessUrl("/logout").permitAll()
+                                logout.logoutSuccessUrl("/login?logout").permitAll()
                 )
                 .build();
     }
