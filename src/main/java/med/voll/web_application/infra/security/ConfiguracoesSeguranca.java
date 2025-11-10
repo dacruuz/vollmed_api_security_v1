@@ -2,6 +2,7 @@ package med.voll.web_application.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -42,13 +43,23 @@ public class ConfiguracoesSeguranca {
                         }
                 )
                 .formLogin(
-                        form ->
-                                form.loginPage("/login").defaultSuccessUrl("/").permitAll()
+                        form -> form
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/")
+                                .permitAll()
                 )
                 .logout(
-                        logout ->
-                                logout.logoutSuccessUrl("/login?logout").permitAll()
+                        logout -> logout
+                                .logoutSuccessUrl("/login?logout")
+                                .permitAll()
                 )
+                .rememberMe(
+                        rememberMe -> rememberMe
+                                .key("lembrarDeMim")
+                                .alwaysRemember(true) // Usado que o usuário seja sempre lembrado.
+                                // .tokenValiditySeconds() // Usado para passar uma quantidade de segundos para que o usuário seja lembrado.
+                )
+                .csrf(Customizer.withDefaults())
                 .build();
     }
 }
