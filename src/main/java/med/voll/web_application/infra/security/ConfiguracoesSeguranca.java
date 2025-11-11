@@ -22,7 +22,7 @@ public class ConfiguracoesSeguranca {
         return http
                 .authorizeHttpRequests(
                         req -> {
-                            req.requestMatchers("/css/**", "/js/**", "/assets/**", "/").permitAll();
+                            req.requestMatchers("/css/**", "/js/**", "/assets/**", "/", "/index", "/home").permitAll();
                             req.anyRequest().authenticated();
                         }
                 )
